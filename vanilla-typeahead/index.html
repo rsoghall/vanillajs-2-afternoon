@@ -84,6 +84,46 @@
 </body>
 
 <script>
+const char = [];
+
+/* variable called `list` who's value is equal to the 
+unordered list with an id of list in the `body` of our 
+HTML. */
+let list = document.getElementById('list');
+let search = document.querySelector('input')
+console.dir(list) 
+fetch(`https://swapi.co/api/people`)
+    .then(response => response.json())
+    .then(response => char.push(...response.results)
+    )
+
+
+function filterText(){
+    const filtered = char.filter(val => val.name.toLowerCase()
+    .includes(this.value.toLowerCase()))
+    .map(val => `<li>${val.name}</li>`)
+
+//add a condtional to check that our `filtered` has at least one value.
+
+    if (filtered.length) {
+        render(filtered)
+    }
+}
+
+// Adjust the `render` method so that it now receives one argument, an array.
+// let render = () => {
+//     let html = char.map(val => `<li>${val.name}</li>`).join('')
+//     list.innerHTML = html;
+// } 
+
+function render(array) {
+    let html = array.join('');
+    list.innerHTML = html;
+}
+
+search.addEventListener('keyup', filterText);
+
+
 </script>
 
 </html>
